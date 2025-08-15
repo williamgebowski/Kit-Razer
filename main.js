@@ -1,5 +1,5 @@
 // Constants
-const PRECO_REF_ITEM = 599.90;
+const PRECO_REF_ITEM = 425.00; // 1700 / 4 = 425 por item
 const PRECO_PROMOCIONAL = 299.90;
 const CHECKOUT_URL = 'https://SEU-CHECKOUT.com/checkout';
 const TIMEZONE = 'America/Sao_Paulo';
@@ -74,8 +74,9 @@ function getEndOfDayInTimezone() {
 }
 
 function updatePriceCalculations() {
-    const totalFrom = PRECO_REF_ITEM * 4;
+    const totalFrom = 1700.00; // Preço total original
     const savings = totalFrom - PRECO_PROMOCIONAL;
+    const discountPercent = Math.round((savings / totalFrom) * 100);
     
     if (domElements.priceFrom) {
         domElements.priceFrom.textContent = formatPrice(totalFrom);
@@ -84,6 +85,12 @@ function updatePriceCalculations() {
     if (domElements.savingsAmount) {
         domElements.savingsAmount.textContent = formatPrice(savings);
     }
+    
+    // Atualizar elementos com porcentagem de desconto
+    const discountElements = document.querySelectorAll('.discount-percent');
+    discountElements.forEach(elem => {
+        elem.textContent = `${discountPercent}%`;
+    });
 }
 
 // Timer Functions
@@ -190,6 +197,14 @@ function initProductGalleries() {
     
     if (headsetMainImage && headsetThumbnails.length > 0) {
         initGallery(headsetMainImage, headsetThumbnails, 'headset');
+    }
+    
+    // Initialize Keyboard Gallery
+    const keyboardMainImage = document.querySelector('.keyboard-main');
+    const keyboardThumbnails = document.querySelectorAll('.keyboard-thumbnails img');
+    
+    if (keyboardMainImage && keyboardThumbnails.length > 0) {
+        initGallery(keyboardMainImage, keyboardThumbnails, 'keyboard');
     }
     
     // Initialize Mouse Gallery
@@ -731,6 +746,53 @@ function initEventListeners() {
     });
 }
 
+// Visual Effects
+function initVisualEffects() {
+    // Parallax effect on hero
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+    });
+    
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.benefit-card, .item-card, .review-card, .spec-item, .faq-item');
+    animatedElements.forEach(el => {
+        el.style.animationPlayState = 'paused';
+        observer.observe(el);
+    });
+    
+    // Mouse follow effect for CTA buttons
+    const ctaButtons = document.querySelectorAll('.cta-primary, .cta-sticky');
+    ctaButtons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            btn.style.setProperty('--mouse-x', `${x}px`);
+            btn.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+}
+
 // Initialization
 function init() {
     // Initialize price calculations
@@ -751,8 +813,11 @@ function init() {
     // Initialize reviews carousel
     initReviewsCarousel();
     
-    // Initialize product galleries (headset, mouse, mousepad)
+    // Initialize product galleries (headset, keyboard, mouse, mousepad)
     initProductGalleries();
+    
+    // Initialize visual effects
+    initVisualEffects();
     
     // Initialize event listeners
     initEventListeners();
@@ -779,7 +844,7 @@ function init() {
         './assets/kit-hero.webp',
         './assets/kit-hero-b.webp',
         './assets/headset-01.png',
-        './assets/headset-02.png'
+        './assets/keyboard-01.png'
     ];
     
     criticalImages.forEach(src => {
