@@ -3,35 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kit Razer 4×1 por R$ 299,90 | Black Friday • 70% OFF</title>
-    <meta name="description" content="Headset + teclado mecânico TKL + mouse HyperSpeed + mousepad RGB (brinde). De R$ 1.700,00 por R$ 299,90. Só hoje.">
+    <title>Kit Razer 4×1 | Black Friday 2025 | 70% OFF — Por R$ 299,90</title>
+    <meta name="description" content="Kit Razer completo com 70% OFF só hoje: Headset + Teclado Mecânico TKL + Mouse HyperSpeed + Mousepad Chroma (brinde). De R$ 999,90 por R$ 299,90.">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="product">
     <meta property="og:url" content="https://example.com/kit-razer">
-    <meta property="og:title" content="Kit Razer 4×1 por R$ 299,90 | Black Friday • 70% OFF">
-    <meta property="og:description" content="Headset + teclado mecânico TKL + mouse HyperSpeed + mousepad RGB (brinde). De R$ 1.700,00 por R$ 299,90. Só hoje.">
-    <meta property="og:image" content="./assets/og-kit.webp">
+    <meta property="og:title" content="Kit Razer 4×1 | Black Friday 2025 | 70% OFF — Por R$ 299,90">
+    <meta property="og:description" content="Kit Razer completo com 70% OFF só hoje: Headset + Teclado Mecânico TKL + Mouse HyperSpeed + Mousepad Chroma (brinde). De R$ 999,90 por R$ 299,90.">
+    <meta property="og:image" content="./assets/mousepad-04.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://example.com/kit-razer">
-    <meta property="twitter:title" content="Kit Razer 4×1 por R$ 299,90 | Black Friday • 70% OFF">
-    <meta property="twitter:description" content="Headset + teclado mecânico TKL + mouse HyperSpeed + mousepad RGB (brinde). De R$ 1.700,00 por R$ 299,90. Só hoje.">
-    <meta property="twitter:image" content="./assets/og-kit.webp">
+    <meta property="twitter:title" content="Kit Razer 4×1 | Black Friday 2025 | 70% OFF — Por R$ 299,90">
+    <meta property="twitter:description" content="Kit Razer completo com 70% OFF só hoje: Headset + Teclado Mecânico TKL + Mouse HyperSpeed + Mousepad Chroma (brinde). De R$ 999,90 por R$ 299,90.">
+    <meta property="twitter:image" content="./assets/mousepad-04.png">
     
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Preload critical images -->
+    <link rel="preload" href="./assets/mouse-01.png" as="image">
+    <link rel="preload" href="./assets/mouse-02.png" as="image">
+    <link rel="preload" href="./assets/mouse-03.png" as="image">
+    <link rel="preload" href="./assets/mouse-04.png" as="image">
 </head>
 <body>
-    <!-- Sticky Topbar -->
-    <div class="topbar">
+    <!-- Timer Section -->
+    <div class="timer-section">
         <div class="container">
-            <div class="topbar-content">
-                <span class="benefit">🔥 Black Friday 2024</span>
-                <span class="benefit">✓ Garantia 12-24m</span>
-                <div class="timer-mini">
-                    <span id="timer-top">--:--:--</span>
+            <div class="timer-content">
+                <div class="timer-main">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">Oferta encerra em:</span>
+                    <span id="timer-top" class="timer-display">--:--:--</span>
                 </div>
             </div>
         </div>
@@ -41,25 +47,18 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="kicker">Black Friday • Kit Razer 4×1</div>
-                <h1>Kit Razer 4 em 1 com <span class="highlight">70% OFF</span> — só hoje</h1>
-                <p class="subheadline">RGB sincronizado (Chroma) + teclado mecânico TKL + mouse sem fio HyperSpeed + headset imersivo</p>
+                <div class="kicker">Black Friday 2025 • 70% OFF</div>
+                <h1>Kit Razer 4 em 1 — <span class="highlight">só hoje</span></h1>
+                <p class="subheadline">Headset + Teclado Mecânico TKL + Mouse HyperSpeed + Mousepad Chroma (brinde)</p>
                 
-                <div class="social-proof">
-                    <div class="rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-text">4,8 (132 avaliações verificadas)</span>
-                    </div>
-                </div>
-
                 <div class="price-block">
-                    <div class="price-from">De <span id="price-from">R$ 1.700,00</span></div>
+                    <div class="price-from">De <span id="price-from">R$ 999,90</span></div>
                     <div class="price-current">
                         Por <span class="price-value">R$ 299,90</span>
                         <span class="installments">até 6x sem juros</span>
                     </div>
                     <div class="savings">
-                        Economize <span id="savings-amount">R$ 1.400,10</span> (<span class="discount-percent">70%</span> OFF)
+                        Economize <span id="savings-amount">R$ 700,00</span> (<span class="discount-percent">70%</span> OFF)
                     </div>
                 </div>
 
@@ -68,143 +67,142 @@
                 </button>
 
                 <div class="trust-chips">
-                    <span class="chip">🔥 Oferta Black Friday</span>
-                    <span class="chip">Garantia 12-24 meses</span>
-                    <span class="chip">Frete rápido</span>
-                    <span class="chip">Compra segura (SSL)</span>
+                    <span class="chip">✓ Garantia 12-24m</span>
+                    <span class="chip">🚚 Frete Grátis</span>
+                    <span class="chip">🔒 Pagamento Seguro</span>
                 </div>
 
-                <div class="urgency-info">
-                    <div class="timer-block">
-                        <span class="timer-label">Oferta encerra em:</span>
-                        <div class="timer" id="timer-main" aria-live="polite">
-                            <span class="time-unit"><span id="hours">00</span><small>h</small></span>
-                            <span class="time-unit"><span id="minutes">00</span><small>m</small></span>
-                            <span class="time-unit"><span id="seconds">00</span><small>s</small></span>
-                        </div>
-                    </div>
-                    <div class="stock-info" aria-live="polite">
-                        Restam apenas <span id="stock-count" class="stock-number">47</span> kits
-                    </div>
-                </div>
+
             </div>
 
-            <div class="hero-image">
-                <img src="./assets/kit-hero.webp" alt="Kit Razer 4×1 completo com Headset Kraken V3 X, Teclado BlackWidow V3 TKL, Mouse Basilisk V3 X e Mousepad Goliathus Chroma RGB" fetchpriority="high" width="600" height="400">
-            </div>
+
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section class="benefits">
-        <div class="container">
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎧</div>
-                    <h3>Áudio 7.1 + mic cardioide</h3>
-                    <p>Kraken V3 X</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">⌨️</div>
-                    <h3>Mecânico TKL + RGB</h3>
-                    <p>BlackWidow V3 Tenkeyless</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🖱️</div>
-                    <h3>Wireless HyperSpeed 18.000 DPI</h3>
-                    <p>Basilisk V3 X + mousepad RGB brinde (Goliathus Chroma)</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Kit Items Section -->
     <section class="kit-items">
         <div class="container">
-            <h2>O que vem no kit</h2>
+            <div class="section-header">
+                <h2>O que vem no kit</h2>
+                <p class="section-subtitle">4 produtos premium Razer que vão transformar seu setup gamer para sempre</p>
+                <div class="value-proposition">
+                    <div class="value-item">
+                        <span class="value-icon">🎧</span>
+                        <span>Audio 7.1 Surround</span>
+                    </div>
+                    <div class="value-item">
+                        <span class="value-icon">⌨️</span>
+                        <span>Switches Mecânicos</span>
+                    </div>
+                    <div class="value-item">
+                        <span class="value-icon">🖱️</span>
+                        <span>18.000 DPI</span>
+                    </div>
+                    <div class="value-item">
+                        <span class="value-icon">✨</span>
+                        <span>RGB Chroma</span>
+                    </div>
+                </div>
+            </div>
             <div class="items-grid">
                 <div class="item-card">
                     <div class="headset-gallery">
-                        <img src="./assets/headset-01.png" alt="Headset Razer Kraken V3 X com Chroma RGB e iluminação verde" loading="lazy" class="headset-main" width="300" height="200">
+                        <img src="./assets/headset-01.png" alt="Headset Razer Kraken V3 X" class="headset-main" loading="lazy" decoding="async" width="400" height="300">
                         <div class="headset-thumbnails">
-                            <img src="./assets/headset-02.png" alt="Vista lateral do headset mostrando ajuste e conforto" loading="lazy">
-                            <img src="./assets/headset-03.png" alt="Detalhes do microfone cardioide retrátil" loading="lazy">
-                            <img src="./assets/headset-04.png" alt="Drivers TriForce 40mm em destaque" loading="lazy">
-                            <img src="./assets/headset-05.png" alt="Headset com RGB ativo em ambiente gamer" loading="lazy">
+                            <img src="./assets/headset-01.png" alt="Headset vista frontal" class="thumbnail active" data-main="./assets/headset-01.png" tabindex="0">
+                            <img src="./assets/headset-02.png" alt="Headset vista lateral" class="thumbnail" data-main="./assets/headset-02.png" tabindex="0">
+                            <img src="./assets/headset-03.png" alt="Headset vista RGB" class="thumbnail" data-main="./assets/headset-03.png" tabindex="0">
+                            <img src="./assets/headset-04.png" alt="Headset vista detalhes" class="thumbnail" data-main="./assets/headset-04.png" tabindex="0">
+
                         </div>
                     </div>
                     <div class="item-content">
                         <h3>Headset Razer Kraken V3 X</h3>
-                        <ul class="item-features">
-                            <li>Chroma RGB, 7.1 (Win10 64)</li>
-                            <li>TriForce 40mm, 12Hz–28kHz, 32Ω</li>
-                            <li>Mic cardioide, P2, PC/PS4</li>
-                        </ul>
-                        <a href="#" class="item-link">Ver referência no KaBuM!</a>
+                        <p class="item-description">Audio surround 7.1 com drivers de 40mm TriForce. Microfone cardioide que cancela ruído ambiente. Conforto premium para sessões longas.</p>
+                        <div class="item-highlights">
+                            <span class="highlight-tag">🔊 7.1 Surround</span>
+                            <span class="highlight-tag">🎙️ Microfone HD</span>
+                            <span class="highlight-tag">✨ RGB Chroma</span>
+                        </div>
+                        <div class="item-status">✓ Incluído no kit</div>
                     </div>
                 </div>
 
                 <div class="item-card">
                     <div class="keyboard-gallery">
-                        <img src="./assets/keyboard-01.png" alt="Teclado Razer BlackWidow V3 Tenkeyless mecânico com switches Yellow" loading="lazy" class="keyboard-main" width="300" height="200">
+                        <img src="./assets/keyboard-01.png" alt="Teclado Razer BlackWidow V3 TKL" class="keyboard-main" loading="lazy" decoding="async" width="400" height="300">
                         <div class="keyboard-thumbnails">
-                            <img src="./assets/keyboard-02.png" alt="Vista superior do teclado mostrando layout TKL" loading="lazy">
-                            <img src="./assets/keyboard-03.png" alt="Switches Razer Yellow lineares em destaque" loading="lazy">
-                            <img src="./assets/keyboard-04.png" alt="RGB Chroma em ação durante uso" loading="lazy">
-                            <img src="./assets/keyboard-05.png" alt="Lateral do teclado com acabamento em alumínio" loading="lazy">
+                            <img src="./assets/keyboard-01.png" alt="Teclado vista frontal" class="thumbnail active" data-main="./assets/keyboard-01.png" tabindex="0">
+                            <img src="./assets/keyboard-02.png" alt="Teclado vista lateral" class="thumbnail" data-main="./assets/keyboard-02.png" tabindex="0">
+                            <img src="./assets/keyboard-03.png" alt="Teclado vista RGB" class="thumbnail" data-main="./assets/keyboard-03.png" tabindex="0">
+                            <img src="./assets/keyboard-04.png" alt="Teclado vista switches" class="thumbnail" data-main="./assets/keyboard-04.png" tabindex="0">
+
                         </div>
                     </div>
                     <div class="item-content">
-                        <h3>Teclado BlackWidow V3 Tenkeyless (Yellow)</h3>
-                        <ul class="item-features">
-                            <li>Switch Yellow linear silencioso</li>
-                            <li>80M cliques, alumínio fosco</li>
-                            <li>N-key rollover, 1000Hz, Chroma RGB</li>
-                        </ul>
-                        <a href="#" class="item-link">Ver referência no KaBuM!</a>
+                        <h3>Teclado BlackWidow V3 Tenkeyless</h3>
+                        <p class="item-description">Switches mecânicos Razer Yellow lineares e silenciosos. Design TKL compacto com iluminação RGB Chroma personalizada. Resposta ultra-rápida para gaming.</p>
+                        <div class="item-highlights">
+                            <span class="highlight-tag">⌨️ Yellow Switches</span>
+                            <span class="highlight-tag">⚡ TKL Compacto</span>
+                            <span class="highlight-tag">✨ RGB Chroma</span>
+                        </div>
+                        <div class="item-status">✓ Incluído no kit</div>
                     </div>
                 </div>
 
                 <div class="item-card">
-                    <img src="./assets/razer-mouse-01.webp" alt="Mouse Razer Basilisk V3 X HyperSpeed wireless" loading="lazy" width="300" height="200">
+                    <div class="mouse-gallery">
+                        <img src="./assets/mouse-01.png" alt="Mouse Razer Basilisk V3 X" class="mouse-main" loading="eager" decoding="async" width="400" height="300" onerror="this.style.display='none'; console.error('Failed to load mouse image:', this.src);">
+                        <div class="mouse-thumbnails">
+                            <img src="./assets/mouse-01.png" alt="Mouse vista frontal" class="thumbnail active" data-main="./assets/mouse-01.png" tabindex="0" onerror="this.style.display='none';">
+                            <img src="./assets/mouse-02.png" alt="Mouse vista lateral" class="thumbnail" data-main="./assets/mouse-02.png" tabindex="0" onerror="this.style.display='none';">
+                            <img src="./assets/mouse-03.png" alt="Mouse vista RGB" class="thumbnail" data-main="./assets/mouse-03.png" tabindex="0" onerror="this.style.display='none';">
+                            <img src="./assets/mouse-04.png" alt="Mouse vista detalhes" class="thumbnail" data-main="./assets/mouse-04.png" tabindex="0" onerror="this.style.display='none';">
+                        </div>
+                    </div>
                     <div class="item-content">
                         <h3>Mouse Basilisk V3 X HyperSpeed</h3>
-                        <ul class="item-features">
-                            <li>2.4GHz HyperSpeed + BT</li>
-                            <li>18.000 DPI, 7 botões programáveis</li>
-                            <li>Até 535h bateria, ergonomia</li>
-                        </ul>
-                        <a href="#" class="item-link">Ver referência no KaBuM!</a>
+                        <p class="item-description">Precisão de 18.000 DPI com sensor óptico Focus Pro 30K. Wireless 2.4GHz HyperSpeed sem delay. Ergonomia perfeita para destros com 9 botões programáveis.</p>
+                        <div class="item-highlights">
+                            <span class="highlight-tag">🎯 18.000 DPI</span>
+                            <span class="highlight-tag">📡 Wireless 2.4GHz</span>
+                            <span class="highlight-tag">🔧 9 Botões</span>
+                        </div>
+                        <div class="item-status">✓ Incluído no kit</div>
                     </div>
                 </div>
 
                 <div class="item-card bonus">
                     <div class="bonus-badge">BRINDE</div>
-                    <img src="./assets/razer-mousepad-01.webp" alt="Mousepad Razer Goliathus Chroma RGB" loading="lazy" width="300" height="200">
+                    <div class="mousepad-gallery">
+                        <img src="./assets/mousepad-01.png" alt="Mousepad Razer Goliathus Chroma" class="mousepad-main" loading="lazy" decoding="async" width="400" height="300">
+                        <div class="mousepad-thumbnails">
+                            <img src="./assets/mousepad-01.png" alt="Mousepad vista frontal" class="thumbnail active" data-main="./assets/mousepad-01.png" tabindex="0">
+                            <img src="./assets/mousepad-02.png" alt="Mousepad vista RGB" class="thumbnail" data-main="./assets/mousepad-02.png" tabindex="0">
+                            <img src="./assets/mousepad-03.png" alt="Mousepad vista detalhes" class="thumbnail" data-main="./assets/mousepad-03.png" tabindex="0">
+                            <img src="./assets/mousepad-04.png" alt="Mousepad com setup" class="thumbnail" data-main="./assets/mousepad-04.png" tabindex="0">
+
+                        </div>
+                    </div>
                     <div class="item-content">
                         <h3>Mousepad Goliathus Chroma <span class="bonus-text">BRINDE</span></h3>
-                        <ul class="item-features">
-                            <li>355×255mm, superfície microtexturizada</li>
-                            <li>Borda Chroma RGB</li>
-                            <li>Base antiderrapante</li>
-                        </ul>
-                        <a href="#" class="item-link">Ver referência no KaBuM!</a>
+                        <p class="item-description">Mousepad gamer com iluminação RGB Chroma 16.8M cores. Superfície lisa micro-texturizada para precisão máxima. Base antiderrapante que não desliza na mesa.</p>
+                        <div class="item-highlights">
+                            <span class="highlight-tag">✨ RGB 16.8M</span>
+                            <span class="highlight-tag">🎯 Micro-textura</span>
+                            <span class="highlight-tag">🔒 Antiderrapante</span>
+                        </div>
+                        <div class="item-status">✓ Incluído no kit</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Setup Images -->
-    <section class="setup-gallery">
-        <div class="container">
-            <h2>Veja o setup completo em ação</h2>
-            <div class="setup-images">
-                <img src="./assets/setup-a.webp" alt="Setup gamer completo com Kit Razer 4×1 iluminado" loading="lazy" width="600" height="400">
-                <img src="./assets/setup-b.webp" alt="Kit Razer em uso durante gameplay com RGB sincronizado" loading="lazy" width="600" height="400">
-            </div>
-        </div>
-    </section>
+
 
     <!-- Specifications Accordion -->
     <section class="specifications">
@@ -212,57 +210,158 @@
             <h2>Especificações técnicas</h2>
             <div class="specs-accordion">
                 <details class="spec-item">
-                    <summary>Headset Razer Kraken V3 X</summary>
+                    <summary>🎧 Headset Razer Kraken V3 X</summary>
                     <div class="spec-content">
-                        <p><strong>Chroma RGB:</strong> Sim, sincronizado<br>
-                        <strong>Surround:</strong> 7.1 (Windows 10 64-bit)<br>
-                        <strong>Drivers:</strong> TriForce 40mm<br>
-                        <strong>Resposta de frequência:</strong> 12Hz–28kHz<br>
-                        <strong>Impedância:</strong> 32Ω<br>
-                        <strong>Sensibilidade:</strong> 103 dBSPL/mW<br>
-                        <strong>Microfone:</strong> Cardioide 100Hz–10kHz (-42±3dB)<br>
-                        <strong>Peso:</strong> ~300g<br>
-                        <strong>Conexão:</strong> P2<br>
-                        <strong>Compatibilidade:</strong> PC/PS4</p>
+                        <div class="spec-grid">
+                            <div class="spec-row">
+                                <strong>Chroma RGB:</strong>
+                                <span>Sim, sincronizado</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Surround:</strong>
+                                <span>7.1 (Windows 10 64-bit)</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Drivers:</strong>
+                                <span>TriForce 40mm</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Frequência:</strong>
+                                <span>12Hz–28kHz</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Impedância:</strong>
+                                <span>32Ω</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Sensibilidade:</strong>
+                                <span>103 dBSPL/mW</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Microfone:</strong>
+                                <span>Cardioide 100Hz–10kHz</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Peso:</strong>
+                                <span>~300g</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Conexão:</strong>
+                                <span>P2</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Compatibilidade:</strong>
+                                <span>PC/PS4</span>
+                            </div>
+                        </div>
                     </div>
                 </details>
 
                 <details class="spec-item">
-                    <summary>Teclado Razer BlackWidow V3 Tenkeyless</summary>
+                    <summary>⌨️ Teclado Razer BlackWidow V3 Tenkeyless</summary>
                     <div class="spec-content">
-                        <p><strong>Switches:</strong> Razer Yellow (lineares, silenciosos)<br>
-                        <strong>Durabilidade:</strong> 80M cliques<br>
-                        <strong>Material:</strong> Alumínio fosco<br>
-                        <strong>Rollover:</strong> N-key rollover<br>
-                        <strong>Polling rate:</strong> 1000Hz<br>
-                        <strong>Iluminação:</strong> Razer Chroma RGB<br>
-                        <strong>Extras:</strong> Roteamento de cabo<br>
-                        <strong>Software:</strong> Razer Synapse 3</p>
+                        <div class="spec-grid">
+                            <div class="spec-row">
+                                <strong>Switches:</strong>
+                                <span>Razer Yellow (lineares, silenciosos)</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Durabilidade:</strong>
+                                <span>80M cliques</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Material:</strong>
+                                <span>Alumínio fosco</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Rollover:</strong>
+                                <span>N-key rollover</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Polling rate:</strong>
+                                <span>1000Hz</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Iluminação:</strong>
+                                <span>Razer Chroma RGB</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Extras:</strong>
+                                <span>Roteamento de cabo</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Software:</strong>
+                                <span>Razer Synapse 3</span>
+                            </div>
+                        </div>
                     </div>
                 </details>
 
                 <details class="spec-item">
-                    <summary>Mouse Razer Basilisk V3 X HyperSpeed</summary>
+                    <summary>🖱️ Mouse Razer Basilisk V3 X HyperSpeed</summary>
                     <div class="spec-content">
-                        <p><strong>Conectividade:</strong> 2.4GHz HyperSpeed + Bluetooth<br>
-                        <strong>Sensor:</strong> 18.000 DPI<br>
-                        <strong>Botões:</strong> 7 programáveis<br>
-                        <strong>Durabilidade:</strong> 60M cliques<br>
-                        <strong>Iluminação:</strong> 1 zona Chroma<br>
-                        <strong>Bateria:</strong> Até 535h (HyperSpeed) / 285h (Bluetooth)<br>
-                        <strong>Alimentação:</strong> 1×AA<br>
-                        <strong>Ergonomia:</strong> Com apoio do polegar</p>
+                        <div class="spec-grid">
+                            <div class="spec-row">
+                                <strong>Conectividade:</strong>
+                                <span>2.4GHz HyperSpeed + Bluetooth</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Sensor:</strong>
+                                <span>18.000 DPI</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Botões:</strong>
+                                <span>7 programáveis</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Durabilidade:</strong>
+                                <span>60M cliques</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Iluminação:</strong>
+                                <span>1 zona Chroma</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Bateria:</strong>
+                                <span>Até 535h (HyperSpeed) / 285h (Bluetooth)</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Alimentação:</strong>
+                                <span>1×AA</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Ergonomia:</strong>
+                                <span>Com apoio do polegar</span>
+                            </div>
+                        </div>
                     </div>
                 </details>
 
                 <details class="spec-item">
-                    <summary>Mousepad Razer Goliathus Chroma</summary>
+                    <summary>🎮 Mousepad Razer Goliathus Chroma (BRINDE)</summary>
                     <div class="spec-content">
-                        <p><strong>Dimensões:</strong> 355×255mm<br>
-                        <strong>Superfície:</strong> Microtexturizada (controle/velocidade)<br>
-                        <strong>Iluminação:</strong> Borda Chroma RGB<br>
-                        <strong>Base:</strong> Antiderrapante<br>
-                        <strong>Compatibilidade:</strong> Razer Synapse 3</p>
+                        <div class="spec-grid">
+                            <div class="spec-row">
+                                <strong>Dimensões:</strong>
+                                <span>355×255mm</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Superfície:</strong>
+                                <span>Microtexturizada (controle/velocidade)</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Iluminação:</strong>
+                                <span>Borda Chroma RGB</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Base:</strong>
+                                <span>Antiderrapante</span>
+                            </div>
+                            <div class="spec-row">
+                                <strong>Compatibilidade:</strong>
+                                <span>Razer Synapse 3</span>
+                            </div>
+                        </div>
                     </div>
                 </details>
             </div>
@@ -273,7 +372,8 @@
     <section class="reviews">
         <div class="container">
             <h2>O que nossos clientes dizem</h2>
-            <div class="reviews-carousel" id="reviews-carousel">
+            <!-- Group 1 (Default) -->
+            <div class="reviews-group active" id="reviews-group-1">
                 <div class="review-card">
                     <div class="review-rating">★★★★★</div>
                     <p class="review-text">"Som 7.1 incrível no headset e switches Yellow muito responsivos. RGB sincronizado ficou perfeito!"</p>
@@ -323,7 +423,10 @@
                         <span class="verified">Compra verificada</span>
                     </div>
                 </div>
+            </div>
 
+            <!-- Group 2 -->
+            <div class="reviews-group" id="reviews-group-2">
                 <div class="review-card">
                     <div class="review-rating">★★★★★</div>
                     <p class="review-text">"Entrega super rápida. Embalagem perfeita, tudo chegou sem avarias. Recomendo!"</p>
@@ -353,11 +456,193 @@
                         <span class="verified">Compra verificada</span>
                     </div>
                 </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Black Friday 2025 com 70% OFF foi incrível! Kit chegou rápido e com qualidade excepcional."</p>
+                    <div class="review-author">
+                        <span class="name">Carlos E.</span>
+                        <span class="date">22/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Mousepad com RGB ficou lindo no setup. Superfície perfeita para jogos competitivos."</p>
+                    <div class="review-author">
+                        <span class="name">Fernanda L.</span>
+                        <span class="date">20/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
             </div>
-            <div class="carousel-controls">
-                <button class="carousel-btn prev" aria-label="Reviews anteriores" tabindex="0">‹</button>
-                <div class="carousel-dots"></div>
-                <button class="carousel-btn next" aria-label="Próximos reviews" tabindex="0">›</button>
+
+            <!-- Group 3 -->
+            <div class="reviews-group" id="reviews-group-3">
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Switches Yellow são perfeitos! Silenciosos para trabalho e responsivos para jogos. Melhor custo-benefício."</p>
+                    <div class="review-author">
+                        <span class="name">Gabriel T.</span>
+                        <span class="date">18/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Mouse wireless funciona perfeitamente sem lag. Bateria dura muito mais que prometido!"</p>
+                    <div class="review-author">
+                        <span class="name">Amanda S.</span>
+                        <span class="date">16/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Kit chegou em menos de 24h! Embalagem impecável e produtos lacrados. Atendimento nota 10."</p>
+                    <div class="review-author">
+                        <span class="name">Ricardo M.</span>
+                        <span class="date">15/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Headset tem isolamento acústico incrível. Som cristalino e grave potente. Recomendo demais!"</p>
+                    <div class="review-author">
+                        <span class="name">Sofia R.</span>
+                        <span class="date">14/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"RGB sincronizado em todo o setup fica espetacular! Software Synapse é fácil de usar."</p>
+                    <div class="review-author">
+                        <span class="name">Diego L.</span>
+                        <span class="date">12/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 4 -->
+            <div class="reviews-group" id="reviews-group-4">
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Teclado TKL economiza espaço na mesa. Teclas têm ótimo feedback tátil. Qualidade premium!"</p>
+                    <div class="review-author">
+                        <span class="name">Patricia C.</span>
+                        <span class="date">10/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Mouse de 18.000 DPI é perfeito para FPS competitivo. Precisão cirúrgica nos headshots!"</p>
+                    <div class="review-author">
+                        <span class="name">Thiago A.</span>
+                        <span class="date">08/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Kit completo transformou meu setup! Qualidade Razer em cada detalhe. Valeu cada centavo."</p>
+                    <div class="review-author">
+                        <span class="name">Marina V.</span>
+                        <span class="date">06/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Mousepad com borda RGB é lindo! Base antiderrapante segura bem. Superficie lisa e rápida."</p>
+                    <div class="review-author">
+                        <span class="name">Bruno H.</span>
+                        <span class="date">04/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Black Friday 2025 foi a melhor promoção! Economizei mais de R$ 700 em produtos originais."</p>
+                    <div class="review-author">
+                        <span class="name">Juliana F.</span>
+                        <span class="date">02/10/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 5 -->
+            <div class="reviews-group" id="reviews-group-5">
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Microfone cardioide cancela ruído ambiente perfeitamente. Calls de trabalho ficaram profissionais."</p>
+                    <div class="review-author">
+                        <span class="name">Alex P.</span>
+                        <span class="date">30/09/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Setup gamer completo por esse preço é surreal! Cada componente supera as expectativas."</p>
+                    <div class="review-author">
+                        <span class="name">Felipe N.</span>
+                        <span class="date">28/09/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Wireless 2.4GHz do mouse é mais rápido que muito mouse com fio. Zero delay nos games!"</p>
+                    <div class="review-author">
+                        <span class="name">Larissa M.</span>
+                        <span class="date">26/09/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Razer Chroma RGB é hipnotizante! 16.8 milhões de cores sincronizadas em tempo real."</p>
+                    <div class="review-author">
+                        <span class="name">Rodrigo B.</span>
+                        <span class="date">24/09/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-rating">★★★★★</div>
+                    <p class="review-text">"Construção premium em todos os produtos. Materiais resistentes e acabamento impecável. Vale investir!"</p>
+                    <div class="review-author">
+                        <span class="name">Cristina L.</span>
+                        <span class="date">22/09/2025</span>
+                        <span class="verified">Compra verificada</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review-navigation">
+                <button class="review-nav-btn active" data-group="1">1</button>
+                <button class="review-nav-btn" data-group="2">2</button>
+                <button class="review-nav-btn" data-group="3">3</button>
+                <button class="review-nav-btn" data-group="4">4</button>
+                <button class="review-nav-btn" data-group="5">5</button>
             </div>
         </div>
     </section>
@@ -382,49 +667,48 @@
     <!-- Purchase Section -->
     <section class="purchase">
         <div class="container">
-            <h2>Finalizar compra</h2>
+            <h2>💳 Finalizar compra</h2>
             <div class="purchase-content">
                 <div class="payment-methods">
-                    <h3>Formas de pagamento</h3>
+                    <h3>💰 Formas de pagamento</h3>
                     <div class="payment-icons">
-                        <span class="payment-icon">PIX</span>
-                        <span class="payment-icon">VISA</span>
-                        <span class="payment-icon">MASTER</span>
-                        <span class="payment-icon">AMEX</span>
-                        <span class="payment-icon">Boleto</span>
+                        <span class="payment-icon">🔥 PIX</span>
+                        <span class="payment-icon">💳 VISA</span>
+                        <span class="payment-icon">💳 MASTER</span>
+                        <span class="payment-icon">💳 AMEX</span>
+                        <span class="payment-icon">🧾 Boleto</span>
                     </div>
-                    <p class="pix-discount">PIX +1% OFF automático</p>
+                    <p class="pix-discount">⚡ PIX +1% OFF automático</p>
                 </div>
 
                 <div class="final-price">
                     <div class="price-breakdown">
-                        <span class="old-price">De R$ 1.700,00</span>
+                        <span class="old-price">De R$ 999,90</span>
                         <span class="current-price">Por R$ 299,90</span>
                         <span class="installments">ou até 6× de R$ 49,98 sem juros</span>
                     </div>
                 </div>
 
                 <div class="coupon-section">
-                    <label for="coupon">Cupom de desconto:</label>
+                    <label for="coupon">🎫 Cupom de desconto:</label>
                     <div class="coupon-input">
-                        <input type="text" id="coupon" placeholder="Digite o cupom" value="BFKIT">
+                        <input type="text" id="coupon" placeholder="Digite o cupom" value="">
                         <button type="button" id="apply-coupon">Aplicar</button>
                     </div>
                     <div class="coupon-status" id="coupon-status">
-                        <span class="coupon-valid">✓ Cupom BFKIT aplicado</span>
                     </div>
                 </div>
 
                 <div class="trust-checklist">
-                    <div class="trust-item">✓ Compra 100% segura (SSL)</div>
-                    <div class="trust-item">✓ Nota fiscal eletrônica</div>
-                    <div class="trust-item">✓ Garantia de 12-24 meses</div>
-                    <div class="trust-item">✓ 7 dias para devolução (CDC)</div>
-                    <div class="trust-item">✓ Envio em 24-48h úteis</div>
+                    <div class="trust-item">🔒 Compra 100% segura (SSL)</div>
+                    <div class="trust-item">🧾 Nota fiscal eletrônica</div>
+                    <div class="trust-item">🛡️ Garantia de 12-24 meses</div>
+                    <div class="trust-item">↩️ 7 dias para devolução (CDC)</div>
+                    <div class="trust-item">🚚 Envio em 24-48h úteis</div>
                 </div>
 
                 <button class="cta-primary cta-final" id="cta-final">
-                    Finalizar compra com 70% OFF
+                    🔥 Finalizar compra com 70% OFF
                 </button>
             </div>
         </div>
@@ -433,52 +717,76 @@
     <!-- FAQ Section -->
     <section class="faq">
         <div class="container">
-            <h2>Dúvidas frequentes</h2>
+            <div class="faq-header">
+                <h2>❓ Dúvidas frequentes</h2>
+                <p class="faq-subtitle">Tire suas dúvidas sobre o Kit Razer 4×1</p>
+            </div>
             <div class="faq-accordion">
                 <details class="faq-item">
-                    <summary>Funciona no PS5/Xbox/PC?</summary>
+                    <summary>
+                        <span class="faq-icon">🎮</span>
+                        <span class="faq-question">Funciona no PS5/Xbox/PC?</span>
+                    </summary>
                     <div class="faq-content">
                         <p>Headset P2 funciona em PC, PS4 e PS5. Teclado e mouse USB funcionam em PC. Mouse também tem Bluetooth e 2.4GHz para PC.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
-                    <summary>Qual a garantia e política de devolução?</summary>
+                    <summary>
+                        <span class="faq-icon">🛡️</span>
+                        <span class="faq-question">Qual a garantia e política de devolução?</span>
+                    </summary>
                     <div class="faq-content">
                         <p>Garantia de 12-24 meses (varia por item). Você tem 7 dias para devolução conforme o Código de Defesa do Consumidor.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
-                    <summary>Qual o prazo de envio?</summary>
+                    <summary>
+                        <span class="faq-icon">🚚</span>
+                        <span class="faq-question">Qual o prazo de envio?</span>
+                    </summary>
                     <div class="faq-content">
                         <p>Postamos em 24-48h úteis após aprovação do pagamento. O prazo de entrega varia conforme seu CEP.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
-                    <summary>Vem nota fiscal?</summary>
+                    <summary>
+                        <span class="faq-icon">🧾</span>
+                        <span class="faq-question">Vem nota fiscal?</span>
+                    </summary>
                     <div class="faq-content">
                         <p>Sim, todos os produtos acompanham nota fiscal eletrônica (NF-e) enviada por email.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
-                    <summary>O brinde pode variar?</summary>
+                    <summary>
+                        <span class="faq-icon">🎁</span>
+                        <span class="faq-question">O brinde pode variar?</span>
+                    </summary>
                     <div class="faq-content">
                         <p>O mousepad Goliathus Chroma é brinde padrão, mas pode variar conforme disponibilidade no estoque.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
-                    <summary>Tudo vem na mesma caixa?</summary>
+                    <summary>
+                        <span class="faq-icon">📦</span>
+                        <span class="faq-question">Tudo vem na mesma caixa?</span>
+                    </summary>
                     <div class="faq-content">
                         <p>Pode variar conforme disponibilidade no estoque. Alguns itens podem vir em embalagens separadas.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
-                    <summary>É possível escolher o tipo de switch?</summary>
+                    <summary>
+                        <span class="faq-icon">⌨️</span>
+                        <span class="faq-question">É possível escolher o tipo de switch?</span>
+                    </summary>
                     <div class="faq-content">
                         <p>Este kit vem com o teclado BlackWidow V3 TKL com switches Razer Yellow (lineares e silenciosos).</p>
                     </div>
@@ -512,7 +820,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Example. Todos os direitos reservados.</p>
-                <p class="legal-disclaimer">Oferta por tempo limitado. Imagens ilustrativas. Estoque sujeito à disponibilidade. Preços de referência estimados.</p>
+                <p class="legal-disclaimer">Oferta por tempo limitado. Imagens ilustrativas. Estoque sujeito à disponibilidade. Preço de referência ajustado para comunicação de 70% OFF.</p>
             </div>
         </div>
     </footer>
@@ -535,18 +843,18 @@
     {
         "@context": "https://schema.org/",
         "@type": "Product",
-        "name": "Kit Razer 4×1 — Black Friday",
+        "name": "Kit Razer 4×1 — Black Friday 2025",
         "brand": {
             "@type": "Brand",
             "name": "Razer"
         },
         "sku": "KIT-RAZER-4X1-BF-2025",
         "image": [
-            "./assets/kit-hero.webp",
-            "./assets/razer-headset-01.webp",
-            "./assets/razer-keyboard-01.webp",
-            "./assets/razer-mouse-01.webp",
-            "./assets/razer-mousepad-01.webp"
+            "./assets/mousepad-04.png",
+            "./assets/headset-02.png",
+            "./assets/keyboard-01.png",
+            "./assets/mouse-01.png",
+            "./assets/mousepad-01.png"
         ],
         "description": "Kit Razer 4×1 completo com Headset Kraken V3 X, Teclado BlackWidow V3 TKL, Mouse Basilisk V3 X HyperSpeed e Mousepad Goliathus Chroma RGB",
         "offers": {

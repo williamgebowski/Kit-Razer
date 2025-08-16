@@ -1,12 +1,12 @@
 // Constants
-const PRECO_REF_ITEM = 425.00; // 1700 / 4 = 425 por item
+const PRECO_REF_ITEM = 249.98; // 999.90 / 4 = 249.98 por item
 const PRECO_PROMOCIONAL = 299.90;
+const PRECO_ORIGINAL = 999.90;
 const CHECKOUT_URL = 'https://SEU-CHECKOUT.com/checkout';
-const TIMEZONE = 'America/Sao_Paulo';
+
 
 // Global state
 let stockCount = 47;
-let currentReviewIndex = 0;
 let timerInterval;
 let stockInterval;
 let isOfferExpired = false;
@@ -14,11 +14,7 @@ let isOfferExpired = false;
 // DOM Elements Cache
 const domElements = {
     timerTop: document.getElementById('timer-top'),
-    timerMain: document.getElementById('timer-main'),
     timerOffer: document.getElementById('timer-offer'),
-    hoursMain: document.getElementById('hours'),
-    minutesMain: document.getElementById('minutes'),
-    secondsMain: document.getElementById('seconds'),
     hoursOffer: document.getElementById('hours-offer'),
     minutesOffer: document.getElementById('minutes-offer'),
     secondsOffer: document.getElementById('seconds-offer'),
@@ -27,7 +23,7 @@ const domElements = {
     savingsAmount: document.getElementById('savings-amount'),
     stickyBottom: document.getElementById('sticky-bottom'),
     ctaButtons: document.querySelectorAll('.cta-primary, .cta-sticky, .cta-final'),
-    reviewsCarousel: document.getElementById('reviews-carousel'),
+
     couponInput: document.getElementById('coupon'),
     couponStatus: document.getElementById('coupon-status'),
     applyCouponBtn: document.getElementById('apply-coupon'),
@@ -41,6 +37,18 @@ function formatNumber(num) {
 
 function formatPrice(price) {
     return `R$ ${price.toFixed(2).replace('.', ',')}`;
+}
+
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
 function getQueryParam(param) {
@@ -61,7 +69,7 @@ function getEndOfDayInTimezone() {
     const now = new Date();
     
     // Create date in São Paulo timezone
-    const spDate = new Date(now.toLocaleString("en-US", {timeZone: TIMEZONE}));
+    const spDate = new Date(now.toLocaleString("en-US", {timeZone: 'America/Sao_Paulo'}));
     const endOfDay = new Date(spDate);
     endOfDay.setHours(23, 59, 59, 999);
     
@@ -73,10 +81,12 @@ function getEndOfDayInTimezone() {
     return new Date(utcEndOfDay + spOffset);
 }
 
+
+
 function updatePriceCalculations() {
-    const totalFrom = 1700.00; // Preço total original
+    const totalFrom = PRECO_ORIGINAL; // Preço total original
     const savings = totalFrom - PRECO_PROMOCIONAL;
-    const discountPercent = Math.round((savings / totalFrom) * 100);
+    const discountPercent = 70; // Fixo em 70%
     
     if (domElements.priceFrom) {
         domElements.priceFrom.textContent = formatPrice(totalFrom);
@@ -108,20 +118,15 @@ function updateTimer() {
     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    // Update main timer
-    if (domElements.hoursMain) domElements.hoursMain.textContent = formatNumber(hours);
-    if (domElements.minutesMain) domElements.minutesMain.textContent = formatNumber(minutes);
-    if (domElements.secondsMain) domElements.secondsMain.textContent = formatNumber(seconds);
+    // Update top timer
+    if (domElements.timerTop) {
+        domElements.timerTop.textContent = `${formatNumber(hours)}:${formatNumber(minutes)}:${formatNumber(seconds)}`;
+    }
 
     // Update offer timer
     if (domElements.hoursOffer) domElements.hoursOffer.textContent = formatNumber(hours);
     if (domElements.minutesOffer) domElements.minutesOffer.textContent = formatNumber(minutes);
     if (domElements.secondsOffer) domElements.secondsOffer.textContent = formatNumber(seconds);
-
-    // Update top timer
-    if (domElements.timerTop) {
-        domElements.timerTop.textContent = `${formatNumber(hours)}:${formatNumber(minutes)}:${formatNumber(seconds)}`;
-    }
 }
 
 function handleOfferExpired() {
@@ -135,9 +140,6 @@ function handleOfferExpired() {
     // Update timer displays
     const expiredText = '00:00:00';
     if (domElements.timerTop) domElements.timerTop.textContent = expiredText;
-    if (domElements.hoursMain) domElements.hoursMain.textContent = '00';
-    if (domElements.minutesMain) domElements.minutesMain.textContent = '00';
-    if (domElements.secondsMain) domElements.secondsMain.textContent = '00';
     if (domElements.hoursOffer) domElements.hoursOffer.textContent = '00';
     if (domElements.minutesOffer) domElements.minutesOffer.textContent = '00';
     if (domElements.secondsOffer) domElements.secondsOffer.textContent = '00';
@@ -211,8 +213,25 @@ function initProductGalleries() {
     const mouseMainImage = document.querySelector('.mouse-main');
     const mouseThumbnails = document.querySelectorAll('.mouse-thumbnails img');
     
+    console.log('Mouse gallery elements:', { mouseMainImage, mouseThumbnails });
+    
     if (mouseMainImage && mouseThumbnails.length > 0) {
         initGallery(mouseMainImage, mouseThumbnails, 'mouse');
+        
+        // Add error handling for mouse images
+        mouseMainImage.addEventListener('error', (e) => {
+            console.error('Error loading mouse main image:', e.target.src);
+            e.target.style.display = 'none';
+        });
+        
+        mouseThumbnails.forEach((thumb, index) => {
+            thumb.addEventListener('error', (e) => {
+                console.error(`Error loading mouse thumbnail ${index}:`, e.target.src);
+                e.target.style.display = 'none';
+            });
+        });
+    } else {
+        console.warn('Mouse gallery elements not found:', { mouseMainImage, mouseThumbnails });
     }
     
     // Initialize Mousepad Gallery
@@ -225,7 +244,27 @@ function initProductGalleries() {
 }
 
 function initGallery(mainImage, thumbnails, productType) {
+    console.log(`Initializing gallery for ${productType}:`, { mainImage, thumbnails });
+    
+    // Ensure main image is visible
+    if (mainImage) {
+        mainImage.style.display = 'block';
+        mainImage.style.visibility = 'visible';
+        mainImage.style.opacity = '1';
+        console.log(`${productType} main image styles:`, {
+            display: mainImage.style.display,
+            visibility: mainImage.style.visibility,
+            opacity: mainImage.style.opacity,
+            src: mainImage.src
+        });
+    }
+    
     thumbnails.forEach((thumb, index) => {
+        // Ensure thumbnails are visible
+        thumb.style.display = 'block';
+        thumb.style.visibility = 'visible';
+        thumb.style.opacity = '1';
+        
         thumb.addEventListener('click', () => {
             // Store original main image src
             const originalSrc = mainImage.src;
@@ -276,126 +315,69 @@ function initGallery(mainImage, thumbnails, productType) {
     });
 }
 
-// Reviews Carousel Functions
-function initReviewsCarousel() {
-    if (!domElements.reviewsCarousel) return;
-
-    const reviews = domElements.reviewsCarousel.children;
-    const totalReviews = reviews.length;
+// Reviews Static Groups Functions
+function initReviewsNavigation() {
+    const navButtons = document.querySelectorAll('.review-nav-btn');
     
-    if (totalReviews === 0) return;
-
-    // Create navigation dots
-    const dotsContainer = document.querySelector('.carousel-dots');
-    if (dotsContainer) {
-        const numPages = Math.ceil(totalReviews / getVisibleReviews());
-        for (let i = 0; i < numPages; i++) {
-            const dot = document.createElement('div');
-            dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
-            dot.addEventListener('click', () => goToSlide(i));
-            dot.setAttribute('aria-label', `Ir para página ${i + 1} de reviews`);
-            dot.setAttribute('tabindex', '0');
-            dot.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    goToSlide(i);
-                }
-            });
-            dotsContainer.appendChild(dot);
-        }
+    if (navButtons.length === 0) {
+        console.warn('Review navigation buttons not found');
+        return;
     }
 
-    // Add navigation event listeners
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    const nextBtn = document.querySelector('.carousel-btn.next');
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => previousReview());
-        prevBtn.addEventListener('keydown', (e) => {
+    console.log('Initializing static reviews navigation with 5 groups');
+
+    // Add click listeners to navigation buttons
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const groupNumber = button.getAttribute('data-group');
+            showReviewGroup(groupNumber);
+            updateActiveButton(button);
+        });
+
+        // Keyboard support
+        button.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                previousReview();
+                const groupNumber = button.getAttribute('data-group');
+                showReviewGroup(groupNumber);
+                updateActiveButton(button);
             }
         });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => nextReview());
-        nextBtn.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                nextReview();
-            }
-        });
-    }
-
-    // Keyboard navigation for carousel
-    domElements.reviewsCarousel.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            previousReview();
-        } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            nextReview();
-        }
     });
 
-    // Auto-scroll
-    setInterval(() => {
-        if (!document.hidden && !isOfferExpired) {
-            nextReview();
-        }
-    }, 8000);
+    // Set initial state (group 1 active)
+    showReviewGroup('1');
 }
 
-function getVisibleReviews() {
-    const width = window.innerWidth;
-    if (width >= 1024) return 3;
-    if (width >= 768) return 2;
-    return 1;
-}
-
-function updateCarouselPosition() {
-    if (!domElements.reviewsCarousel) return;
-
-    const visibleReviews = getVisibleReviews();
-    const reviewWidth = 300; // 280px + 20px gap
-    const offset = currentReviewIndex * reviewWidth;
-    
-    domElements.reviewsCarousel.style.transform = `translateX(-${offset}px)`;
-    
-    // Update dots
-    const dots = document.querySelectorAll('.carousel-dot');
-    const activeSlide = Math.floor(currentReviewIndex / visibleReviews);
-    
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === activeSlide);
+function showReviewGroup(groupNumber) {
+    // Hide all groups
+    const allGroups = document.querySelectorAll('.reviews-group');
+    allGroups.forEach(group => {
+        group.classList.remove('active');
     });
+
+    // Show selected group
+    const targetGroup = document.getElementById(`reviews-group-${groupNumber}`);
+    if (targetGroup) {
+        targetGroup.classList.add('active');
+        console.log(`Showing review group ${groupNumber}`);
+    } else {
+        console.warn(`Review group ${groupNumber} not found`);
+    }
 }
 
-function nextReview() {
-    const totalReviews = domElements.reviewsCarousel?.children.length || 0;
-    const visibleReviews = getVisibleReviews();
-    const maxIndex = Math.max(0, totalReviews - visibleReviews);
-    
-    currentReviewIndex = currentReviewIndex >= maxIndex ? 0 : currentReviewIndex + visibleReviews;
-    updateCarouselPosition();
+function updateActiveButton(activeButton) {
+    // Remove active class from all buttons
+    const allButtons = document.querySelectorAll('.review-nav-btn');
+    allButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Add active class to clicked button
+    activeButton.classList.add('active');
 }
 
-function previousReview() {
-    const totalReviews = domElements.reviewsCarousel?.children.length || 0;
-    const visibleReviews = getVisibleReviews();
-    const maxIndex = Math.max(0, totalReviews - visibleReviews);
-    
-    currentReviewIndex = currentReviewIndex <= 0 ? maxIndex : currentReviewIndex - visibleReviews;
-    updateCarouselPosition();
-}
 
-function goToSlide(slideIndex) {
-    const visibleReviews = getVisibleReviews();
-    currentReviewIndex = slideIndex * visibleReviews;
-    updateCarouselPosition();
-}
 
 // Coupon Functions
 function applyCoupon() {
@@ -549,7 +531,8 @@ function updateProductSchema() {
         const schema = JSON.parse(domElements.productSchema.textContent);
         
         // Update price validity
-        const endOfDay = getEndOfDayInTimezone();
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999);
         schema.offers.priceValidUntil = endOfDay.toISOString().split('T')[0];
         
         // Update availability if offer expired
@@ -629,12 +612,7 @@ function enhanceAccessibility() {
         }
     });
     
-    // Enhance timer accessibility
-    if (domElements.timerMain) {
-        domElements.timerMain.setAttribute('role', 'timer');
-        domElements.timerMain.setAttribute('aria-live', 'polite');
-        domElements.timerMain.setAttribute('aria-label', 'Tempo restante da oferta');
-    }
+
     
     // Enhance stock counter accessibility
     if (domElements.stockCount) {
@@ -690,12 +668,7 @@ function initEventListeners() {
             }
         });
         
-        domElements.couponInput.addEventListener('input', () => {
-            // Auto-apply known coupon
-            if (domElements.couponInput.value.toUpperCase() === 'BFKIT') {
-                applyCoupon();
-            }
-        });
+
     }
     
     // Scroll events
@@ -723,15 +696,15 @@ function initEventListeners() {
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             // Pause timer updates to save resources
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
+            // if (timerInterval) { // This line is removed as per the edit hint
+            //     clearInterval(timerInterval);
+            // }
         } else {
             // Resume timer updates
-            if (!isOfferExpired) {
-                updateTimer(); // Update immediately
-                timerInterval = setInterval(updateTimer, 1000);
-            }
+            // if (!isOfferExpired) { // This line is removed as per the edit hint
+            //     updateTimer(); // Update immediately
+            //     timerInterval = setInterval(updateTimer, 1000);
+            // }
         }
     });
     
@@ -748,14 +721,7 @@ function initEventListeners() {
 
 // Visual Effects
 function initVisualEffects() {
-    // Parallax effect on hero
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const heroSection = document.querySelector('.hero');
-        if (heroSection) {
-            heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-    });
+    // Parallax effect removed to prevent hero disappearing during scroll
     
     // Intersection Observer for animations
     const observerOptions = {
@@ -801,34 +767,130 @@ function init() {
     // Initialize AB test
     initABTest();
     
-    // Start timer
-    updateTimer();
-    if (!isOfferExpired) {
-        timerInterval = setInterval(updateTimer, 1000);
-    }
-    
     // Start stock updates (every minute)
     stockInterval = setInterval(updateStock, 60000);
     
-    // Initialize reviews carousel
-    initReviewsCarousel();
+    // Initialize reviews carousel with slight delay to ensure DOM is ready
+    setTimeout(() => {
+        initReviewsNavigation();
+    }, 100);
+    
+    // Add resize listener for general overflow fixes
+    window.addEventListener('resize', debounce(() => {
+        // Fix any potential overflow issues
+        document.body.style.overflowX = 'hidden';
+        document.documentElement.style.overflowX = 'hidden';
+    }, 250));
     
     // Initialize product galleries (headset, keyboard, mouse, mousepad)
     initProductGalleries();
     
+    // Verify image loading
+    setTimeout(verifyImageLoading, 1000);
+    
+    // Initialize FAQ animations
+    initFAQAnimations();
+    
     // Initialize visual effects
     initVisualEffects();
+    
+    // Fix overflow issues on load
+    setTimeout(() => {
+        document.body.style.overflowX = 'hidden';
+        document.documentElement.style.overflowX = 'hidden';
+        
+        // Ensure all containers are properly contained
+        const containers = document.querySelectorAll('.container, .items-grid, .reviews-carousel');
+        containers.forEach(container => {
+            container.style.maxWidth = '100%';
+            container.style.overflow = 'hidden';
+        });
+        
+        // Ensure all gallery images load properly
+        const galleryImages = document.querySelectorAll('.headset-main, .keyboard-main, .mouse-main, .mousepad-main, .thumbnail');
+        galleryImages.forEach(img => {
+            img.style.background = 'transparent';
+            img.style.display = 'block';
+            
+            // Force reload if image fails to load
+            img.addEventListener('error', () => {
+                console.log(`Reloading image: ${img.src}`);
+                setTimeout(() => {
+                    const src = img.src;
+                    img.src = '';
+                    img.src = src;
+                }, 100);
+            });
+        });
+        
+        // Ensure urgency section is always visible
+        const urgencyInfo = document.querySelector('.urgency-info');
+        const stockInfo = document.querySelector('.stock-info');
+        
+        if (urgencyInfo) {
+            urgencyInfo.style.display = 'flex';
+            urgencyInfo.style.visibility = 'visible';
+            urgencyInfo.style.opacity = '1';
+            urgencyInfo.style.position = 'relative';
+            urgencyInfo.style.zIndex = '10';
+        }
+        
+        if (stockInfo) {
+            stockInfo.style.display = 'block';
+            stockInfo.style.visibility = 'visible';
+            stockInfo.style.opacity = '1';
+        }
+        
+        // Fix responsive alignment issues
+        adjustResponsiveAlignment();
+    }, 500);
+    
+    // Function to adjust responsive alignment
+    function adjustResponsiveAlignment() {
+        const containers = document.querySelectorAll('.container');
+        const heroContent = document.querySelector('.hero-content');
+        const itemsGrid = document.querySelector('.items-grid');
+        
+        containers.forEach(container => {
+            container.style.boxSizing = 'border-box';
+            container.style.margin = '0 auto';
+        });
+        
+        if (heroContent) {
+            heroContent.style.textAlign = 'center';
+            heroContent.style.width = '100%';
+            heroContent.style.maxWidth = '900px';
+            heroContent.style.margin = '0 auto';
+        }
+        
+        if (itemsGrid) {
+            itemsGrid.style.margin = '0 auto';
+            itemsGrid.style.boxSizing = 'border-box';
+        }
+        
+        // Adjust alignment based on screen size
+        const updateAlignment = () => {
+            const width = window.innerWidth;
+            const topbarContent = document.querySelector('.topbar-content');
+            
+            if (topbarContent && width <= 640) {
+                topbarContent.style.flexDirection = 'column';
+                topbarContent.style.textAlign = 'center';
+            } else if (topbarContent) {
+                topbarContent.style.flexDirection = 'row';
+                topbarContent.style.textAlign = 'left';
+            }
+        };
+        
+        updateAlignment();
+        window.addEventListener('resize', debounce(updateAlignment, 250));
+    }
     
     // Initialize event listeners
     initEventListeners();
     
     // Enhance accessibility
     enhanceAccessibility();
-    
-    // Apply initial coupon if present
-    if (domElements.couponInput?.value) {
-        applyCoupon();
-    }
     
     // Initialize lazy loading
     lazyLoadImages();
@@ -838,6 +900,26 @@ function init() {
     
     // Initial sticky bottom check
     handleStickyBottom();
+    
+    // Start timer
+    updateTimer();
+    if (!isOfferExpired) {
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    
+    // Update timer display
+    const timerTop = document.getElementById('timer-top');
+    if (timerTop) {
+        timerTop.textContent = '--:--:--';
+    }
+    
+    // Auto-apply coupon when page loads (after everything is initialized)
+    setTimeout(() => {
+        if (domElements.couponInput) {
+            domElements.couponInput.value = 'BFKIT';
+            applyCoupon();
+        }
+    }, 100);
     
     // Preload critical images
     const criticalImages = [
@@ -875,17 +957,7 @@ function init() {
 window.addEventListener('error', (e) => {
     console.warn('JavaScript error:', e.error);
     
-    // Fallback behavior for critical functions
-    if (e.error && e.error.message.includes('timer')) {
-        // Ensure CTA buttons remain functional
-        domElements.ctaButtons.forEach(btn => {
-            if (!btn.disabled) {
-                btn.addEventListener('click', () => {
-                    window.location.href = preserveUTMs(CHECKOUT_URL);
-                });
-            }
-        });
-    }
+
     
     // Track errors for debugging
     if (typeof gtag !== 'undefined') {
@@ -914,6 +986,48 @@ if ('performance' in window && 'measure' in window.performance) {
     });
 }
 
+// Image loading verification
+function verifyImageLoading() {
+    const mouseImages = document.querySelectorAll('.mouse-gallery img');
+    console.log('Verifying mouse images:', mouseImages);
+    
+    mouseImages.forEach((img, index) => {
+        if (img.complete) {
+            console.log(`Mouse image ${index} loaded successfully:`, img.src);
+        } else {
+            console.log(`Mouse image ${index} still loading:`, img.src);
+            img.addEventListener('load', () => {
+                console.log(`Mouse image ${index} finished loading:`, img.src);
+            });
+            img.addEventListener('error', (e) => {
+                console.error(`Mouse image ${index} failed to load:`, img.src, e);
+            });
+        }
+    });
+}
+
+// FAQ Animations
+function initFAQAnimations() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    if (faqItems.length === 0) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    faqItems.forEach(item => {
+        observer.observe(item);
+    });
+}
+
 // Start the application when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -933,6 +1047,7 @@ if (typeof module !== 'undefined' && module.exports) {
         applyCoupon,
         handleCheckout,
         trackCheckoutEvent,
-        updatePriceCalculations
+        updatePriceCalculations,
+        initFAQAnimations
     };
 }
