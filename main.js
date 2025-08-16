@@ -1,7 +1,8 @@
 // Constants
-const PRECO_REF_ITEM = 249.98; // 999.90 / 4 = 249.98 por item
-const PRECO_PROMOCIONAL = 299.90;
-const PRECO_ORIGINAL = 999.90;
+const PRECO_DE = 2199.90;
+const PRECO_POR = 659.90;
+const DESCONTO_PCT = 70;
+const ECONOMIA = PRECO_DE - PRECO_POR; // R$ 1.540,00
 const CHECKOUT_URL = 'https://SEU-CHECKOUT.com/checkout';
 
 
@@ -84,9 +85,9 @@ function getEndOfDayInTimezone() {
 
 
 function updatePriceCalculations() {
-    const totalFrom = PRECO_ORIGINAL; // Preço total original
-    const savings = totalFrom - PRECO_PROMOCIONAL;
-    const discountPercent = 70; // Fixo em 70%
+    const totalFrom = PRECO_DE; // Preço total original
+    const savings = ECONOMIA; // Economia calculada
+    const discountPercent = DESCONTO_PCT; // Fixo em 70%
     
     if (domElements.priceFrom) {
         domElements.priceFrom.textContent = formatPrice(totalFrom);
@@ -169,9 +170,9 @@ function handleOfferExpired() {
 function updateStock() {
     if (isOfferExpired) return;
     
-    // Decrease stock randomly every 7-12 minutes
+    // Decrease stock randomly every 7-12 minutes (média de 10 min)
     const randomChance = Math.random();
-    const shouldDecrease = randomChance < 0.15; // 15% chance each check (every minute)
+    const shouldDecrease = randomChance < 0.1; // 10% chance each check (every minute) = ~10 min em média
     
     if (shouldDecrease && stockCount > 19) {
         const decrease = Math.floor(Math.random() * 2) + 1; // 1-2 units
@@ -387,14 +388,14 @@ function applyCoupon() {
     if (!statusElement) return;
     
     if (couponCode === 'BFKIT') {
-        statusElement.innerHTML = '<span class="coupon-valid">✓ Cupom BFKIT aplicado</span>';
+        statusElement.innerHTML = '<span class="coupon-valid">✓ BFKIT aplicado</span>';
         statusElement.setAttribute('aria-live', 'polite');
         
         // Track coupon application
         if (typeof gtag !== 'undefined') {
             gtag('event', 'coupon_applied', {
                 coupon_code: couponCode,
-                value: PRECO_PROMOCIONAL,
+                value: PRECO_POR,
                 currency: 'BRL'
             });
         }
@@ -464,7 +465,7 @@ function trackCheckoutEvent() {
     // Facebook Pixel tracking
     if (typeof fbq !== 'undefined') {
         fbq('track', 'InitiateCheckout', {
-            value: PRECO_PROMOCIONAL,
+            value: PRECO_POR,
             currency: 'BRL',
             content_name: 'Kit Razer 4×1 — Black Friday',
             content_category: 'Gaming',
@@ -477,12 +478,12 @@ function trackCheckoutEvent() {
     if (typeof gtag !== 'undefined') {
         gtag('event', 'begin_checkout', {
             currency: 'BRL',
-            value: PRECO_PROMOCIONAL,
+            value: PRECO_POR,
             items: [{
                 item_id: 'KIT-RAZER-4X1-BF-2025',
                 item_name: 'Kit Razer 4×1 — Black Friday',
                 item_category: 'Gaming',
-                price: PRECO_PROMOCIONAL,
+                price: PRECO_POR,
                 quantity: 1
             }]
         });
@@ -493,7 +494,7 @@ function trackCheckoutEvent() {
         gtag('event', 'kit_razer_checkout_start', {
             event_category: 'ecommerce',
             event_label: 'Kit Razer 4x1 Black Friday',
-            value: PRECO_PROMOCIONAL
+            value: PRECO_POR
         });
     }
 }
@@ -505,13 +506,7 @@ function initABTest() {
     if (variant === 'b') {
         document.body.classList.add('variant-b');
         
-        // Change hero image for variant B
-        const heroImage = document.querySelector('.hero-image img');
-        if (heroImage) {
-            const originalSrc = heroImage.src;
-            heroImage.src = originalSrc.replace('kit-hero.webp', 'kit-hero-b.webp');
-            heroImage.alt = 'Kit Razer 4×1 completo - Variante B com destaque especial';
-        }
+        // Variant B styling only (no hero image change needed)
         
         // Track AB test variant
         if (typeof gtag !== 'undefined') {
@@ -530,10 +525,9 @@ function updateProductSchema() {
     try {
         const schema = JSON.parse(domElements.productSchema.textContent);
         
-        // Update price validity
-        const endOfDay = new Date();
-        endOfDay.setHours(23, 59, 59, 999);
-        schema.offers.priceValidUntil = endOfDay.toISOString().split('T')[0];
+        // Update price validity - hoje às 23:59:59 (America/Sao_Paulo)
+        const endOfDay = getEndOfDayInTimezone();
+        schema.offers.priceValidUntil = endOfDay.toISOString();
         
         // Update availability if offer expired
         if (isOfferExpired) {
@@ -687,7 +681,6 @@ function initEventListeners() {
             clearTimeout(resizeTimeout);
         }
         resizeTimeout = setTimeout(() => {
-            updateCarouselPosition();
             handleStickyBottom();
         }, 100);
     });
@@ -913,18 +906,16 @@ function init() {
         timerTop.textContent = '--:--:--';
     }
     
-    // Auto-apply coupon when page loads (after everything is initialized)
-    setTimeout(() => {
-        if (domElements.couponInput) {
-            domElements.couponInput.value = 'BFKIT';
-            applyCoupon();
-        }
-    }, 100);
+    // Não aplicar cupom automaticamente - só após ação do usuário
+    // setTimeout(() => {
+    //     if (domElements.couponInput) {
+    //         domElements.couponInput.value = 'BFKIT';
+    //         applyCoupon();
+    //     }
+    // }, 100);
     
     // Preload critical images
     const criticalImages = [
-        './assets/kit-hero.webp',
-        './assets/kit-hero-b.webp',
         './assets/headset-01.png',
         './assets/keyboard-01.png'
     ];
